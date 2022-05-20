@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name=""/>
+
+  <group name="General">
+    <entry name="iconA" type="String">
+      <label>Icon A</label>
+      <default>semi-starred-symbolic</default>
+    </entry>
+    <entry name="iconB" type="String">
+      <label>Icon B</label>
+      <default>semi-starred-symbolic-rtl</default>
+    </entry>
+    <entry name="colorA" type="String">
+      <label>Color A</label>
+      <default>BreezeClassic</default>
+    </entry>
+    <entry name="colorB" type="String">
+      <label>Color B</label>
+      <default>BreezeDark</default>
+    </entry>
+    <entry name="checked" type="bool">
+      <default>false</default>
+    </entry>
+  </group>
+</kcfg>
