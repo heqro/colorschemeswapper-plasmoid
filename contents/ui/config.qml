@@ -13,8 +13,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>
  */
-// for Connections.enabled: QtQuick 2.7 is tied to Qt 5.7
-import QtQuick 2.7
+
+import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
