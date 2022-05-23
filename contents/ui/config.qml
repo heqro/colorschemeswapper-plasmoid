@@ -13,7 +13,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>
  */
-import QtQuick 2.2
+// for Connections.enabled: QtQuick 2.7 is tied to Qt 5.7
+import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -21,12 +22,12 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 Item {
     id: configPage
 
-    property alias cfg_colorA: cBoxA.currentText
-    property alias cfg_colorB: cBoxB.currentText
+    property alias cfg_colorA: labelA.text // labels to store previous choices (ComboBox doesn't like to do it by itself)
+    property alias cfg_colorB: labelB.text // labels to store previous choices (ComboBox doesn't like to do it by itself)
     // TODO - allow the user to set them from here.
     //property alias cfg_iconA:
     //property alias cfg_iconB:
-    
+
 
     PlasmaCore.DataSource {
         id: executable
@@ -43,10 +44,33 @@ Item {
             var colors = data["stdout"].split("\n")
             for (var i = 0; i < colors.length; i++) // parse command output
                 colors[i] = colors[i].substring(3).replace(" (current color scheme)", "")
-            colorsListReady(colors)
-            disconnectSource(sourceName) // cmd finished
+                colorsListReady(colors)
+                disconnectSource(sourceName) // cmd finished
         }
 
+    }
+
+    // Copies of the last saved ComboBox entries.
+    Label {
+        id: labelA
+        visible: false
+    }
+    Label {
+        id: labelB
+        visible: false
+    }
+
+    function setText(comboBox, text) { // comboboxes don't really allow to set current entry by text => manually search for them
+        var found = false
+        for (var colorIndex = 0; colorIndex < comboBox.count; colorIndex++) {
+            if (comboBox.currentText === text) {
+                found = true
+                break
+            }
+            comboBox.incrementCurrentIndex()
+        }
+        if (!found)
+            console.log("Color not found (perhaps it has been removed?).")
     }
 
     Connections {
@@ -54,6 +78,12 @@ Item {
         onColorsListReady: {
             cBoxA.model = colors
             cBoxB.model = colors
+            // look for color in list
+            setText(cBoxA, labelA.text)
+            setText(cBoxB, labelB.text)
+            // enable changes user just after everything is set up
+            cBoxA.isChangeAvailable = true
+            cBoxB.isChangeAvailable = true
         }
     }
 
@@ -65,11 +95,18 @@ Item {
                 Layout.column: 0
                 text: i18n("Color A")
             }
+
             ComboBox {
                 id: cBoxA
+                property bool isChangeAvailable: false
+
                 Layout.row: 0
                 Layout.column: 1
                 Layout.minimumWidth: 300
+                onCurrentTextChanged: {
+                    if (isChangeAvailable)
+                        labelA.text = currentText
+                }
             }
             Label {
                 Layout.row :1
@@ -78,15 +115,21 @@ Item {
             }
             ComboBox {
                 id: cBoxB
+                property bool isChangeAvailable: false
+
                 Layout.row: 1
                 Layout.column: 1
                 Layout.minimumWidth: 300
+
+                onCurrentTextChanged: {
+                    if (isChangeAvailable)
+                        labelB.text = currentText
+                }
             }
-        }   
+        }
     }
 
     Component.onCompleted: {
-        console.log("Completo")
         executable.exec("plasma-apply-colorscheme --list-schemes | tail --lines=+2")
     }
 }
