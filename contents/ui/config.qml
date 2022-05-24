@@ -25,8 +25,8 @@ Item {
     property alias cfg_colorA: labelA.text // labels to store previous choices (ComboBox doesn't like to do it by itself)
     property alias cfg_colorB: labelB.text // labels to store previous choices (ComboBox doesn't like to do it by itself)
     // TODO - allow the user to set them from here.
-    //property alias cfg_iconA:
-    //property alias cfg_iconB:
+    property string cfg_iconA: plasmoid.configuration.iconA
+    property string cfg_iconB: plasmoid.configuration.iconB
 
 
     PlasmaCore.DataSource {
@@ -108,11 +108,13 @@ Item {
                         labelA.text = currentText
                 }
             }
+
             Label {
                 Layout.row :1
                 Layout.column: 0
                 text: i18n("Color B")
             }
+
             ComboBox {
                 id: cBoxB
                 property bool isChangeAvailable: false
@@ -125,6 +127,33 @@ Item {
                     if (isChangeAvailable)
                         labelB.text = currentText
                 }
+            }
+
+            Label {
+                Layout.row: 2
+                Layout.column: 0
+                text: i18n("Icon A")
+            }
+            IconPicker {
+                Layout.row: 2
+                Layout.column: 1
+                currentIcon: cfg_iconA
+                defaultIcon: "semi-starred-symbolic"
+                    onIconChanged: cfg_iconA = iconName
+                    enabled: true
+            }
+            Label {
+                Layout.row: 3
+                Layout.column: 0
+                text: i18n("Icon B")
+            }
+            IconPicker {
+                Layout.row: 3
+                Layout.column: 1
+                currentIcon: cfg_iconB
+                defaultIcon: "semi-starred-symbolic-rtl"
+                    onIconChanged: cfg_iconB = iconName
+                    enabled: true
             }
         }
     }
