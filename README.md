@@ -1,5 +1,5 @@
 # Color Scheme Swapper
-## A plasmoid to swap between two color schemes
+## A plasmoid to swap between two color schemes (requires Plasma >= 5.22)
 
 
 
