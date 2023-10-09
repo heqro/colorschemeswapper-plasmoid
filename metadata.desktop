@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Color Scheme Swapper
-Comment=Swap your day/night color schemes
+Name=Day/Night Switcher
+Comment=Swap your day/night or any other color scheme you want
 
-Icon=starred-symbolic
+Icon=weather-clear-night
 Type=Service
 X-KDE-ServiceTypes=Plasma/Applet
 
@@ -11,7 +11,7 @@ X-Plasma-MainScript=ui/main.qml
 
 X-KDE-PluginInfo-Author=Heqro
 X-KDE-PluginInfo-Email=heqromancer@gmail.com
-X-KDE-PluginInfo-Name=colorschemeswapper
+X-KDE-PluginInfo-Name=day-night-switcher
 X-KDE-PluginInfo-Version=0.0.1
 X-KDE-PluginInfo-Category=Utilities
 X-KDE-PluginInfo-License=GPL
