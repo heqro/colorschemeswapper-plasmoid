@@ -138,7 +138,7 @@ Item {
                 Layout.row: 2
                 Layout.column: 1
                 currentIcon: cfg_iconA
-                defaultIcon: "semi-starred-symbolic"
+                defaultIcon: "weather-clear"
                     onIconChanged: cfg_iconA = iconName
                     enabled: true
             }
@@ -151,7 +151,7 @@ Item {
                 Layout.row: 3
                 Layout.column: 1
                 currentIcon: cfg_iconB
-                defaultIcon: "semi-starred-symbolic-rtl"
+                defaultIcon: "weather-clear-night"
                     onIconChanged: cfg_iconB = iconName
                     enabled: true
             }
