@@ -1,7 +1,7 @@
 # Color Scheme Swapper
 ## A plasmoid to swap between two color schemes (requires Plasma >= 5.22)
 
+A simple button that allows you to switch between two chosen Plasma Color Schemes.
+Not only day/night, but any scheme you want!
 
-
-https://github.com/trytomakeyouprivate/day-night-switcher-plasmoid/raw/main/Day-Night-Switcher-Demo.webm
-
+https://raw.githubusercontent.com/trytomakeyouprivate/day-night-switcher-plasmoid/main/Day-Night-Switcher-Demo.mp4
