@@ -1,0 +1,22 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "heqromancer@gmail.com",
+                "Name": "Heqro"
+            }
+        ],
+        "Category": "Utilities",
+        "Description": "Swap your day/night or any other color scheme you want",
+        "Icon": "weather-clear-night",
+        "Id": "day-night-switcher",
+        "License": "GPL",
+        "Name": "Day/Night Switcher",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "0.0.1"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}
