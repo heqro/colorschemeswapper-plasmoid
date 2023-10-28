@@ -41,11 +41,14 @@ Item {
         }
 
         onNewData: {
-            var colors = data["stdout"].split("\n")
-            for (var i = 0; i < colors.length; i++) // parse command output
-                colors[i] = colors[i].substring(3).replace(" (current color scheme)", "")
-                colorsListReady(colors)
-                disconnectSource(sourceName) // cmd finished
+            var colors = data["stdout"].split("\n").slice(0, -1)
+            for (var i = 0; i < colors.length; i++) { // parse command output
+                //console.log("input", colors[i])
+                colors[i] = colors[i].trim().substring(2).replace(/ \(.*\)/g, ''); // remove leading asterisk. Then, remove everything between and parentheses (usually "(current color scheme)")
+                //console.log("output", colors[i])
+            }
+            colorsListReady(colors)
+            disconnectSource(sourceName) // cmd finished
         }
 
     }
