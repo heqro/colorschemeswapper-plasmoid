@@ -17,14 +17,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http: //www.gnu.org/licenses/>.
  */
-import QtQuick 2.2
-import QtQuick.Controls 1.3
-import QtQuick.Layouts 1.1
-import org.kde.kquickcontrolsaddons 2.0 as KQuickAddons
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import org.kde.kquickcontrolsaddons as KQuickAddons
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.ksvg as KSvg
+import org.kde.kirigami as Kirigami
 
-// basically taken from kickoff
 Button {
     id: iconButton
 
@@ -56,15 +57,15 @@ Button {
         iconMenu.open(0, height)
     }
 
-    PlasmaCore.FrameSvgItem {
+    KSvg.FrameSvgItem {
         id: previewFrame
         anchors.centerIn: parent
-        imagePath: plasmoid.location === PlasmaCore.Types.Vertical || plasmoid.location === PlasmaCore.Types.Horizontal
+        imagePath: location === PlasmaCore.Types.Vertical || location === PlasmaCore.Types.Horizontal
                     ? "widgets/panel-background" : "widgets/background"
         width: units.iconSizes.medium   + fixedMargins.left + fixedMargins.right
         height: units.iconSizes.medium  + fixedMargins.top + fixedMargins.bottom
 
-        PlasmaCore.IconItem {
+        Kirigami.IconItem {
             id: iconPreview
             anchors.centerIn: parent
             width: units.iconSizes.medium  

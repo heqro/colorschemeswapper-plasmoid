@@ -8,15 +8,14 @@
         ],
         "Category": "Utilities",
         "Description": "Swap your day/night or any other color scheme you want",
-        "Icon": "weather-clear-night",
+        "Icon": "weather-clear-night-symbolic",
         "Id": "day-night-switcher",
         "License": "GPL",
         "Name": "Day/Night Switcher",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "0.0.1"
     },
+    "KPackageStructure": "Plasma/Applet",
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-API-Minimum-Version": "6.0"
 }
