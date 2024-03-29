@@ -69,11 +69,5 @@ Button {
             enabled: currentIconName !== Tools.defaultIconName
             onClicked: currentIconName = Tools.defaultIconName
         }
-        MenuItem {
-            text: i18nc("@action:inmenu", "Remove icon")
-            icon.name: "delete"
-            enabled: currentIconName !== "" && formFactor !== PlasmaCore.Types.Vertical
-            onClicked: currentIconName = ""
-        }
     }
 }
