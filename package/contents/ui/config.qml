@@ -145,142 +145,28 @@ KCM.SimpleKCM {
                 text: i18n("Icon A")
             }
 
-            Button {
-                id: iconButton_A
+            IconPicker {
+                Layout.row: 2
+                Layout.column: 1
 
-                Kirigami.FormData.label: i18n("Icon:")
-
-                implicitWidth: previewFrame_A.width + Kirigami.Units.smallSpacing * 2
-                implicitHeight: previewFrame_A.height + Kirigami.Units.smallSpacing * 2
-                hoverEnabled: true
-
-                Accessible.name: i18nc("@action:button", "Change Application Launcher's icon")
-                Accessible.description: i18nc("@info:whatsthis", "Current icon is %1. Click to open menu to change the current icon or reset to the default icon.", cfg_iconA)
-                Accessible.role: Accessible.ButtonMenu
-
-                ToolTip.delay: Kirigami.Units.toolTipDelay
-                ToolTip.text: i18nc("@info:tooltip", "Icon name is \"%1\"", cfg_iconA)
-                ToolTip.visible: cfg_iconA.length > 0 && iconButton_A.hovered
-
-                KIconThemes.IconDialog {
-                    id: iconDialog_A
-                    onIconNameChanged: cfg_iconA = iconName || Tools.defaultIconName
-                }
-
-                onPressed: iconMenu_A.opened ? iconMenu_A.close() : iconMenu_A.open()
-
-                KSvg.FrameSvgItem {
-                    id: previewFrame_A
-                    anchors.centerIn: parent
-                    imagePath: plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal
-                            ? "widgets/panel-background" : "widgets/background"
-                    width: Kirigami.Units.iconSizes.large + fixedMargins.left + fixedMargins.right
-                    height: Kirigami.Units.iconSizes.large + fixedMargins.top + fixedMargins.bottom
-
-                    Kirigami.Icon {
-                        anchors.centerIn: parent
-                        width: Kirigami.Units.iconSizes.large
-                        height: width
-                        source: Tools.iconOrDefault(plasmoid.formFactor, cfg_iconA)
-                    }
-                }
-
-                Menu {
-                    id: iconMenu_A
-
-                    // Appear below the button
-                    y: +parent.height
-
-                    MenuItem {
-                        text: i18nc("@item:inmenu Open icon chooser dialog", "Choose…")
-                        icon.name: "document-open-folder"
-                        Accessible.description: i18nc("@info:whatsthis", "Choose an icon for Application Launcher")
-                        onClicked: iconDialog_A.open()
-                    }
-                    MenuItem {
-                        text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
-                        icon.name: "edit-clear"
-                        enabled: cfg_iconA !== Tools.defaultIconName
-                        onClicked: cfg_iconA = Tools.defaultIconName
-                    }
-                    MenuItem {
-                        text: i18nc("@action:inmenu", "Remove icon")
-                        icon.name: "delete"
-                        enabled: cfg_iconA !== "" //&& menuLabel.text && plasmoid.formFactor !== PlasmaCore.Types.Vertical
-                        onClicked: cfg_iconA = ""
-                    }
-                }
+                currentIconName: cfg_iconA
+                onCurrentIconNameChanged: cfg_iconA = currentIconName
+                formFactor: plasmoid.formFactor
             }
+
             Label {
                 Layout.row: 3
                 Layout.column: 0
                 text: i18n("Icon B")
             }
-            Button {
-                id: iconButton_B
 
-                Kirigami.FormData.label: i18n("Icon:")
+            IconPicker {
+                Layout.row: 3
+                Layout.column: 1
 
-                implicitWidth: previewFrame_B.width + Kirigami.Units.smallSpacing * 2
-                implicitHeight: previewFrame_B.height + Kirigami.Units.smallSpacing * 2
-                hoverEnabled: true
-
-                Accessible.name: i18nc("@action:button", "Change Application Launcher's icon")
-                Accessible.description: i18nc("@info:whatsthis", "Current icon is %1. Click to open menu to change the current icon or reset to the default icon.", cfg_iconB)
-                Accessible.role: Accessible.ButtonMenu
-
-                ToolTip.delay: Kirigami.Units.toolTipDelay
-                ToolTip.text: i18nc("@info:tooltip", "Icon name is \"%1\"", cfg_iconB)
-                ToolTip.visible: cfg_iconB.length > 0 && iconButton_B.hovered
-
-                KIconThemes.IconDialog {
-                    id: iconDialog_B
-                    onIconNameChanged: cfg_iconB = iconName || Tools.defaultIconName
-                }
-
-                onPressed: iconMenu_B.opened ? iconMenu_B.close() : iconMenu_B.open()
-
-                KSvg.FrameSvgItem {
-                    id: previewFrame_B
-                    anchors.centerIn: parent
-                    imagePath: plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal
-                            ? "widgets/panel-background" : "widgets/background"
-                    width: Kirigami.Units.iconSizes.large + fixedMargins.left + fixedMargins.right
-                    height: Kirigami.Units.iconSizes.large + fixedMargins.top + fixedMargins.bottom
-
-                    Kirigami.Icon {
-                        anchors.centerIn: parent
-                        width: Kirigami.Units.iconSizes.large
-                        height: width
-                        source: Tools.iconOrDefault(plasmoid.formFactor, cfg_iconB)
-                    }
-                }
-
-                Menu {
-                    id: iconMenu_B
-
-                    // Appear below the button
-                    y: +parent.height
-
-                    MenuItem {
-                        text: i18nc("@item:inmenu Open icon chooser dialog", "Choose…")
-                        icon.name: "document-open-folder"
-                        Accessible.description: i18nc("@info:whatsthis", "Choose an icon for Application Launcher")
-                        onClicked: iconDialog_B.open()
-                    }
-                    MenuItem {
-                        text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
-                        icon.name: "edit-clear"
-                        enabled: cfg_iconB !== Tools.defaultIconName
-                        onClicked: cfg_iconB = Tools.defaultIconName
-                    }
-                    MenuItem {
-                        text: i18nc("@action:inmenu", "Remove icon")
-                        icon.name: "delete"
-                        enabled: cfg_iconB !== "" //&& menuLabel.text && plasmoid.formFactor !== PlasmaCore.Types.Vertical
-                        onClicked: cfg_iconB = ""
-                    }
-                }
+                currentIconName: cfg_iconB
+                onCurrentIconNameChanged: cfg_iconB = currentIconName
+                formFactor: plasmoid.formFactor
             }
         }
     }

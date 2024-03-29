@@ -1,7 +1,18 @@
-import Kirigami
+import QtQuick
+import QtQuick.Controls
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.core as PlasmaCore
+import org.kde.iconthemes as KIconThemes
+import org.kde.ksvg as KSvg
+
+
+import "code/tools.js" as Tools
 
 Button {
     id: iconButton
+
+    required property string currentIconName
+    required property var formFactor
 
     Kirigami.FormData.label: i18n("Icon:")
 
@@ -10,16 +21,16 @@ Button {
     hoverEnabled: true
 
     Accessible.name: i18nc("@action:button", "Change Application Launcher's icon")
-    Accessible.description: i18nc("@info:whatsthis", "Current icon is %1. Click to open menu to change the current icon or reset to the default icon.", cfg_icon)
+    Accessible.description: i18nc("@info:whatsthis", "Current icon is %1. Click to open menu to change the current icon or reset to the default icon.", currentIconName)
     Accessible.role: Accessible.ButtonMenu
 
     ToolTip.delay: Kirigami.Units.toolTipDelay
-    ToolTip.text: i18nc("@info:tooltip", "Icon name is \"%1\"", cfg_icon)
-    ToolTip.visible: iconButton.hovered && cfg_icon.length > 0
+    ToolTip.text: i18nc("@info:tooltip", "Icon name is \"%1\"", currentIconName)
+    ToolTip.visible: iconButton.hovered && currentIconName.length > 0
 
     KIconThemes.IconDialog {
         id: iconDialog
-        onIconNameChanged: cfg_icon = iconName || Tools.defaultIconName
+        onIconNameChanged: currentIconName = iconName || Tools.defaultIconName
     }
 
     onPressed: iconMenu.opened ? iconMenu.close() : iconMenu.open()
@@ -27,7 +38,7 @@ Button {
     KSvg.FrameSvgItem {
         id: previewFrame
         anchors.centerIn: parent
-        imagePath: Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal
+        imagePath: formFactor === PlasmaCore.Types.Vertical || formFactor === PlasmaCore.Types.Horizontal
                 ? "widgets/panel-background" : "widgets/background"
         width: Kirigami.Units.iconSizes.large + fixedMargins.left + fixedMargins.right
         height: Kirigami.Units.iconSizes.large + fixedMargins.top + fixedMargins.bottom
@@ -36,7 +47,7 @@ Button {
             anchors.centerIn: parent
             width: Kirigami.Units.iconSizes.large
             height: width
-            source: Tools.iconOrDefault(Plasmoid.formFactor, cfg_icon)
+            source: Tools.iconOrDefault(formFactor, currentIconName)
         }
     }
 
@@ -55,14 +66,14 @@ Button {
         MenuItem {
             text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
             icon.name: "edit-clear"
-            enabled: cfg_icon !== Tools.defaultIconName
-            onClicked: cfg_icon = Tools.defaultIconName
+            enabled: currentIconName !== Tools.defaultIconName
+            onClicked: currentIconName = Tools.defaultIconName
         }
         MenuItem {
             text: i18nc("@action:inmenu", "Remove icon")
             icon.name: "delete"
-            enabled: cfg_icon !== "" && menuLabel.text && Plasmoid.formFactor !== PlasmaCore.Types.Vertical
-            onClicked: cfg_icon = ""
+            enabled: currentIconName !== "" && formFactor !== PlasmaCore.Types.Vertical
+            onClicked: currentIconName = ""
         }
     }
 }
