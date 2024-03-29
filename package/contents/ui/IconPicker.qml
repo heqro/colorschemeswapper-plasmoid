@@ -22,12 +22,11 @@ import org.kde.iconthemes as KIconThemes
 import org.kde.ksvg as KSvg
 
 
-import "code/tools.js" as Tools
-
 Button {
     id: iconButton
 
     required property string currentIconName
+    required property string defaultIconName
     required property var formFactor
 
     Kirigami.FormData.label: i18n("Icon:")
@@ -46,7 +45,7 @@ Button {
 
     KIconThemes.IconDialog {
         id: iconDialog
-        onIconNameChanged: currentIconName = iconName || Tools.defaultIconName
+        onIconNameChanged: currentIconName = iconName || defaultIconName
     }
 
     onPressed: iconMenu.opened ? iconMenu.close() : iconMenu.open()
@@ -63,7 +62,7 @@ Button {
             anchors.centerIn: parent
             width: Kirigami.Units.iconSizes.large
             height: width
-            source: Tools.iconOrDefault(formFactor, currentIconName)
+            source: iconOrDefault(currentIconName)
         }
     }
 
@@ -82,8 +81,14 @@ Button {
         MenuItem {
             text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
             icon.name: "edit-clear"
-            enabled: currentIconName !== Tools.defaultIconName
-            onClicked: currentIconName = Tools.defaultIconName
+            enabled: currentIconName !== defaultIconName
+            onClicked: currentIconName = defaultIconName
         }
+    }
+
+    function iconOrDefault(preferredIconName) {
+        // Vertical panels must have an icon, at least a default one.
+        return (formFactor === PlasmaCore.Types.Vertical && preferredIconName === "")
+            ? defaultIconName : preferredIconName;
     }
 }

@@ -24,8 +24,6 @@ import org.kde.plasma.plasma5support as Plasma5Support
 import org.kde.kirigami as Kirigami
 import org.kde.ksvg as KSvg
 
-import "code/tools.js" as Tools
-
 KCM.SimpleKCM {
     id: configPage
 
@@ -34,6 +32,10 @@ KCM.SimpleKCM {
     // TODO - allow the user to set them from here.
     property string cfg_iconA: configuration.iconA
     property string cfg_iconB: configuration.iconB
+
+    // HACK - this should be read from /package/contents/config/main.xml
+    readonly property string default_iconA: 'semi-starred-symbolic'
+    readonly property string default_iconB: 'semi-starred-symbolic-rtl'
 
 
     Plasma5Support.DataSource {
@@ -150,8 +152,10 @@ KCM.SimpleKCM {
                 Layout.column: 1
 
                 currentIconName: cfg_iconA
-                onCurrentIconNameChanged: cfg_iconA = currentIconName
+                defaultIconName: default_iconA
                 formFactor: plasmoid.formFactor
+
+                onCurrentIconNameChanged: cfg_iconA = currentIconName
             }
 
             Label {
@@ -165,8 +169,11 @@ KCM.SimpleKCM {
                 Layout.column: 1
 
                 currentIconName: cfg_iconB
-                onCurrentIconNameChanged: cfg_iconB = currentIconName
+                defaultIconName: default_iconB
                 formFactor: plasmoid.formFactor
+
+
+                onCurrentIconNameChanged: cfg_iconB = currentIconName
             }
         }
     }
