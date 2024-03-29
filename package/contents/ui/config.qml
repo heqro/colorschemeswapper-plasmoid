@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 by Piotr Markiewicz p.marki@wp.pl
+ * Copyright (C) 2024 by Heqro <heqromancer@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
