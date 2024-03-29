@@ -150,8 +150,8 @@ KCM.SimpleKCM {
 
                 Kirigami.FormData.label: i18n("Icon:")
 
-                implicitWidth: previewFrame_B.width + Kirigami.Units.smallSpacing * 2
-                implicitHeight: previewFrame_B.height + Kirigami.Units.smallSpacing * 2
+                implicitWidth: previewFrame_A.width + Kirigami.Units.smallSpacing * 2
+                implicitHeight: previewFrame_A.height + Kirigami.Units.smallSpacing * 2
                 hoverEnabled: true
 
                 Accessible.name: i18nc("@action:button", "Change Application Launcher's icon")
@@ -163,14 +163,14 @@ KCM.SimpleKCM {
                 ToolTip.visible: cfg_iconA.length > 0 && iconButton_A.hovered
 
                 KIconThemes.IconDialog {
-                    id: iconDialog
+                    id: iconDialog_A
                     onIconNameChanged: cfg_iconA = iconName || Tools.defaultIconName
                 }
 
-                onPressed: iconMenu.opened ? iconMenu.close() : iconMenu.open()
+                onPressed: iconMenu_A.opened ? iconMenu_A.close() : iconMenu_A.open()
 
                 KSvg.FrameSvgItem {
-                    id: previewFrame_B
+                    id: previewFrame_A
                     anchors.centerIn: parent
                     imagePath: plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal
                             ? "widgets/panel-background" : "widgets/background"
@@ -186,7 +186,7 @@ KCM.SimpleKCM {
                 }
 
                 Menu {
-                    id: iconMenu
+                    id: iconMenu_A
 
                     // Appear below the button
                     y: +parent.height
@@ -195,7 +195,7 @@ KCM.SimpleKCM {
                         text: i18nc("@item:inmenu Open icon chooser dialog", "Choose…")
                         icon.name: "document-open-folder"
                         Accessible.description: i18nc("@info:whatsthis", "Choose an icon for Application Launcher")
-                        onClicked: iconDialog.open()
+                        onClicked: iconDialog_A.open()
                     }
                     MenuItem {
                         text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
@@ -221,8 +221,8 @@ KCM.SimpleKCM {
 
                 Kirigami.FormData.label: i18n("Icon:")
 
-                implicitWidth: previewFrame.width + Kirigami.Units.smallSpacing * 2
-                implicitHeight: previewFrame.height + Kirigami.Units.smallSpacing * 2
+                implicitWidth: previewFrame_B.width + Kirigami.Units.smallSpacing * 2
+                implicitHeight: previewFrame_B.height + Kirigami.Units.smallSpacing * 2
                 hoverEnabled: true
 
                 Accessible.name: i18nc("@action:button", "Change Application Launcher's icon")
@@ -234,14 +234,14 @@ KCM.SimpleKCM {
                 ToolTip.visible: cfg_iconB.length > 0 && iconButton_B.hovered
 
                 KIconThemes.IconDialog {
-                    id: iconDialog_A
+                    id: iconDialog_B
                     onIconNameChanged: cfg_iconB = iconName || Tools.defaultIconName
                 }
 
                 onPressed: iconMenu_B.opened ? iconMenu_B.close() : iconMenu_B.open()
 
                 KSvg.FrameSvgItem {
-                    id: previewFrame
+                    id: previewFrame_B
                     anchors.centerIn: parent
                     imagePath: plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal
                             ? "widgets/panel-background" : "widgets/background"
@@ -266,7 +266,7 @@ KCM.SimpleKCM {
                         text: i18nc("@item:inmenu Open icon chooser dialog", "Choose…")
                         icon.name: "document-open-folder"
                         Accessible.description: i18nc("@info:whatsthis", "Choose an icon for Application Launcher")
-                        onClicked: iconDialog.open()
+                        onClicked: iconDialog_B.open()
                     }
                     MenuItem {
                         text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
