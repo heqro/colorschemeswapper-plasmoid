@@ -25,5 +25,17 @@
     <entry name="checked" type="bool">
       <default>false</default>
     </entry>
+    <entry name="useExtraCommand_iconA" type="bool">
+      <default>false</default>
+    </entry>
+    <entry name="useExtraCommand_iconB" type="bool">
+      <default>false</default>
+    </entry>
+    <entry name="textField_iconA" type="String">
+      <default></default>
+    </entry>
+    <entry name="textField_iconB" type="String">
+      <default></default>
+    </entry>
   </group>
 </kcfg>

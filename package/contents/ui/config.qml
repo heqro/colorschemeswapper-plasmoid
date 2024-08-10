@@ -23,6 +23,7 @@ import org.kde.iconthemes as KIconThemes
 import org.kde.plasma.plasma5support as Plasma5Support
 import org.kde.kirigami as Kirigami
 import org.kde.ksvg as KSvg
+import org.kde.plasma.components as PlasmaComponents
 
 KCM.SimpleKCM {
     id: configPage
@@ -33,9 +34,18 @@ KCM.SimpleKCM {
     property string cfg_iconA: configuration.iconA
     property string cfg_iconB: configuration.iconB
 
+    property alias cfg_useExtraCommand_iconA: checkBox_iconA.checked
+    property alias cfg_useExtraCommand_iconB: checkBox_iconB.checked
+
+    property alias cfg_textField_iconA: textField_iconA.text
+    property alias cfg_textField_iconB: textField_iconB.text
+
+
     // HACK - this should be read from /package/contents/config/main.xml
     readonly property string default_iconA: 'semi-starred-symbolic'
     readonly property string default_iconB: 'semi-starred-symbolic-rtl'
+
+
 
 
     Plasma5Support.DataSource {
@@ -174,6 +184,38 @@ KCM.SimpleKCM {
 
 
                 onCurrentIconNameChanged: cfg_iconB = currentIconName
+            }
+
+            CheckBox {
+                id: checkBox_iconA
+                Layout.row: 4
+                Layout.column:0
+                Layout.columnSpan:2
+                text: i18n('Execute the following command when changing to color A')
+            }
+
+            TextField {
+                id: textField_iconA
+                Layout.row: 5
+                Layout.column:0
+                Layout.columnSpan:2
+                enabled: checkBox_iconA.checked
+            }
+
+            CheckBox {
+                id: checkBox_iconB
+                Layout.row: 6
+                Layout.column:0
+                Layout.columnSpan:2
+                text: i18n('Execute the following command when changing to color B')
+            }
+
+            TextField {
+                id: textField_iconB
+                Layout.row: 7
+                Layout.column:0
+                Layout.columnSpan:2
+                enabled: checkBox_iconB.checked
             }
         }
     }

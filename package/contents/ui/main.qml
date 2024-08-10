@@ -13,6 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>
  */
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -24,24 +25,34 @@ import org.kde.kirigami as Kirigami
 
 PlasmoidItem {
     id: root
- 
+
     // TODO - detect external color scheme change
 
     Plasma5Support.DataSource {
         id: executable
         engine: "executable"
         connectedSources: []
-        onNewData: { 
+        onNewData: {
             disconnectSource(sourceName)
         }
-        
+
         function exec(cmd) {
             connectSource(cmd)
         }
 
         function swapColorScheme() {
-            var colorSchemeName = plasmoid.configuration.checked ? plasmoid.configuration.colorB : plasmoid.configuration.colorA
+            const colorSchemeName = plasmoid.configuration.checked ? plasmoid.configuration.colorB : plasmoid.configuration.colorA
             exec("plasma-apply-colorscheme " + colorSchemeName)
+        }
+
+        function executeAdditionalCommand() {
+            if (!plasmoid.configuration.checked && plasmoid.configuration.useExtraCommand_iconA) {
+                exec(plasmoid.configuration.textField_iconA)
+            }
+
+            if (plasmoid.configuration.checked && plasmoid.configuration.useExtraCommand_iconB) {
+                exec(plasmoid.configuration.textField_iconB)
+            }
         }
     }
 
@@ -57,6 +68,7 @@ PlasmoidItem {
             hoverEnabled: true
             onClicked: {
                 executable.swapColorScheme()
+                executable.executeAdditionalCommand()
                 plasmoid.configuration.checked = !plasmoid.configuration.checked
             }
         }
