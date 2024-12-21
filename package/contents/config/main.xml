@@ -37,5 +37,17 @@
     <entry name="textField_iconB" type="String">
       <default></default>
     </entry>
+    <entry name="enableAutoSwitch" type="bool">
+      <label>Enable automatic switching</label>
+      <default>false</default>
+    </entry>
+    <entry name="dayStartTime" type="String">
+      <label>Day start time</label>
+      <default>06:00</default>
+    </entry>
+    <entry name="nightStartTime" type="String">
+      <label>Night start time</label>
+      <default>18:00</default>
+    </entry>
   </group>
 </kcfg>
