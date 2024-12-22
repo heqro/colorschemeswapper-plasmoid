@@ -39,7 +39,9 @@ KCM.SimpleKCM {
 
     property alias cfg_textField_iconA: textField_iconA.text
     property alias cfg_textField_iconB: textField_iconB.text
-
+    property alias cfg_enableAutoSwitch: enableAutoSwitch.checked
+    property alias cfg_dayStartTime: dayStartTime.text
+    property alias cfg_nightStartTime: nightStartTime.text
 
     // HACK - this should be read from /package/contents/config/main.xml
     readonly property string default_iconA: 'semi-starred-symbolic'
@@ -216,6 +218,43 @@ KCM.SimpleKCM {
                 Layout.column:0
                 Layout.columnSpan:2
                 enabled: checkBox_iconB.checked
+            }
+        }
+
+        GroupBox {
+            Layout.fillWidth: true
+            title: i18n("Automatic Switching")
+
+            ColumnLayout {
+                CheckBox {
+                    id: enableAutoSwitch
+                    text: i18n("Enable automatic switching")
+                }
+
+                GridLayout {
+                    columns: 2
+                    enabled: enableAutoSwitch.checked
+
+                    Label {
+                        text: i18n("Day starts at:")
+                    }
+                    TextField {
+                        id: dayStartTime
+                        placeholderText: "06:00"
+                        inputMask: "99:99"
+                        text: plasmoid.configuration.dayStartTime
+                    }
+
+                    Label {
+                        text: i18n("Night starts at:")
+                    }
+                    TextField {
+                        id: nightStartTime
+                        placeholderText: "18:00"
+                        inputMask: "99:99"
+                        text: plasmoid.configuration.nightStartTime
+                    }
+                }
             }
         }
     }

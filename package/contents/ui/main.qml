@@ -28,6 +28,34 @@ PlasmoidItem {
 
     // TODO - detect external color scheme change
 
+    Timer {
+        id: timeCheckTimer
+        interval: 60000
+        running: plasmoid.configuration.enableAutoSwitch
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            const themeAShouldBeEnabled = isDaytime()
+            const themeAIsEnabled = plasmoid.configuration.checked
+
+            if (themeAShouldBeEnabled !== themeAIsEnabled) {
+                executable.swapColorScheme()
+                executable.executeAdditionalCommand()
+                plasmoid.configuration.checked = !plasmoid.configuration.checked
+            }
+        }
+
+        function isDaytime() {
+            const now = new Date()
+            const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`
+
+            const dayStart = plasmoid.configuration.dayStartTime || "06:00"
+            const nightStart = plasmoid.configuration.nightStartTime || "18:00"
+
+            return (currentTime >= dayStart && currentTime < nightStart)
+        }
+    }
+
     Plasma5Support.DataSource {
         id: executable
         engine: "executable"
